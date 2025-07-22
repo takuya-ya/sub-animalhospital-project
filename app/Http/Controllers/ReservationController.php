@@ -32,10 +32,12 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         //
-        $reservation = Reservation::create([
-            'user_id' => $request->user_id,
-            'reservation_datetime' => $request->reservation_datetime, // ←ここ追加
+        $validated = $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
+            'reservation_datetime' => 'required|date'
         ]);
+
+        $reservation = Reservation::create($validated);
         return redirect()->route('reservation.index')->with('success', '予約が完了しました');
     }
 
