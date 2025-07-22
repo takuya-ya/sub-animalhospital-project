@@ -33,7 +33,7 @@ class ReservationController extends Controller
     {
         //
         $validated = $request->validate([
-            'user_id' => 'required|integer',
+            'user_id' => 'required|integer|exists:users,id',
             'reservation_datetime' => 'required|date'
         ]);
 
