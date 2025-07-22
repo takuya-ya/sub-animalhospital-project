@@ -1,6 +1,8 @@
 こんにちは
+
 @foreach ($reservations as $user)
 <p>
-    {{ $user->name }}
+    {{ $user->user_id }}
+    {{ $user->reservation_datetime }}
 </p>
 @endforeach
