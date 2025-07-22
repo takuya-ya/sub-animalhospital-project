@@ -36,6 +36,7 @@ class ReservationController extends Controller
             'user_id' => $request->user_id,
             'reservation_datetime' => $request->reservation_datetime, // ←ここ追加
         ]);
+        $request->with('message', '保存しました');
 
         return back();
     }
