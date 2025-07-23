@@ -18,14 +18,16 @@
         </div>
         @endif
 
-        @foreach ($reservations as $user)
+        <!-- 予約一覧表示 -->
+        <!-- $reservations は Reservation モデルのインスタンスの コレクション（配列のようなもの）。controllerから渡す -->
+        @foreach ($reservations as $reservation)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
-                {{ $user->user_id }}
+               名前 : {{ $reservation->user->name }} 様&nbsp;&nbsp;/&nbsp;&nbsp;ユーザーID : {{ $reservation->user_id }} 
             </h1>
             <hr class="w-full">
             <p class="mt-4 p-4">
-                予約日時:{{ $user->reservation_datetime }}
+                予約日時:{{ $reservation->reservation_datetime }} 
             </p>
         </div>
         @endforeach

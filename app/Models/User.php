@@ -22,6 +22,11 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    // hasManyのため、メソッド名は複数形が一般的
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
