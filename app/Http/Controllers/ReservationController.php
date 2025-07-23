@@ -83,5 +83,6 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         //
+        return destroy($reservation);
     }
 }

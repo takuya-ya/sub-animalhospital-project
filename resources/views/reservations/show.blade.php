@@ -18,6 +18,11 @@
                                 編集
                             </x-primary-button>
                         </a>
+                         <a href="{{ route('reservation.edit', $reservation)}}">
+                            <x-primary-button>
+                                削除
+                            </x-primary-button>
+                        </a>
                     </div>
                 </div>
                 <hr>
