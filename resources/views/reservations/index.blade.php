@@ -23,7 +23,9 @@
         @foreach ($reservations as $reservation)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
-               名前 : {{ $reservation->user->name }} 様&nbsp;&nbsp;/&nbsp;&nbsp;ユーザーID : {{ $reservation->user_id }} 
+                <a href=" {{ route('reservation.show', $reservation)}}" class="text-blue-600">
+                    名前 : {{ $reservation->user->name }} 様&nbsp;&nbsp;/&nbsp;&nbsp;ユーザーID : {{ $reservation->user_id }} 
+                </a>
             </h1>
             <hr class="w-full">
             <p class="mt-4 p-4">

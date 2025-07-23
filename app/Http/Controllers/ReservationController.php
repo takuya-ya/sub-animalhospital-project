@@ -44,9 +44,12 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
+    // 引数は個別予約データのインスタンス。タイプヒントと依存注入を使用
+    // ルートパラメータと引数の変数名は一致させる必要がある
     public function show(Reservation $reservation)
     {
         //
+        return view('reservations.show', compact('reservation'));
     }
 
     /**
@@ -55,6 +58,7 @@ class ReservationController extends Controller
     public function edit(Reservation $reservation)
     {
         //
+        return view('reservations.edit', compact('reservation'));
     }
 
     /**
@@ -63,6 +67,14 @@ class ReservationController extends Controller
     public function update(Request $request, Reservation $reservation)
     {
         //
+        $validated = $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
+            'reservation_datetime' => 'required|date'
+        ]);
+
+        $reservation->update($validated);
+
+        return redirect()->route('reservation.index')->with('success', '予約更新しました');
     }
 
     /**
@@ -71,5 +83,6 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         //
+        return destroy($reservation);
     }
 }
