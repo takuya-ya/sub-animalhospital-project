@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -80,9 +81,15 @@ class ReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    // 引数は個別予約データのインスタンス。タイプヒントと依存注入を使用
     public function destroy(Reservation $reservation)
-    {
+    {   
+        // cp:自分の予約のみ削除可能
+        if ($reservation->user_id !== Auth::id()) {
+            abort(403);
+        }
         //
-        return destroy($reservation);
+        $reservation->delete();
+        return redirect()->route('reservation.index')->with('success', '予約を削除しました');
     }
 }
