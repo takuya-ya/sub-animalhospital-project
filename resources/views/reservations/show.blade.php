@@ -18,11 +18,15 @@
                                 編集
                             </x-primary-button>
                         </a>
-                         <a href="{{ route('reservation.edit', $reservation)}}">
-                            <x-primary-button>
+                        <!-- cp:onsubmit 削除前に確認させる -->
+                        <!-- aタグはGETメソッド対応なので、formタグでPOSTメソッドとして対応 -->
+                        <form method="POST" action="{{ route('reservation.destroy', $reservation) }}" onsubmit="return confirm('本当に削除しますか？');">
+                            @csrf
+                            @method('DELETE')
+                            <x-danger-button>
                                 削除
-                            </x-primary-button>
-                        </a>
+                            </x-danger-button>
+                        </form>
                     </div>
                 </div>
                 <hr>
@@ -33,14 +37,14 @@
                 <br>
 
                 <div class="text-sm font-semibold flex flex-row-revetse">
-                    <p> 
+                    <p>
                         {{ $reservation->created_at->format('Y年m月d日 H:i') }} に予約されました
                     </p>
                 </div>
             </div>
 
         </div>
-      
+
     </div>
 
 
